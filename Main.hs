@@ -11,7 +11,7 @@ type Address = Word64
 main :: IO ()
 main = do
     Options{..} <- parseCLI
-    let targetAddress = readAddress oAddress
+    let targetAddress = readAddress $ dropHexPrefix oAddress
 
     systemMap <- lines <$> readFile oSystemMap
     let result = last . takeWhile ((<= targetAddress) . systemMapAddress) $ systemMap
